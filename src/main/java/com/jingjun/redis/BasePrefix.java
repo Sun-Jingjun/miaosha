@@ -1,0 +1,35 @@
+package com.jingjun.redis;
+
+/**
+ * 抽象类，实现基本功能
+ */
+public abstract class BasePrefix implements KeyPrefix{
+
+	/**
+	 * 存活时间
+	 */
+	private int expireSeconds;
+
+	/**
+	 * 前缀
+	 */
+	private String prefix;
+	
+	public BasePrefix(String prefix) {//0代表永不过期
+		this(0, prefix);
+	}
+	
+	public BasePrefix( int expireSeconds, String prefix) {
+		this.expireSeconds = expireSeconds;
+		this.prefix = prefix;
+	}
+	
+	public int expireSeconds() {//默认0代表永不过期
+		return expireSeconds;
+	}
+
+	public String getPrefix() {
+		String className = getClass().getSimpleName();
+		return className+":" + prefix;
+	}
+}
